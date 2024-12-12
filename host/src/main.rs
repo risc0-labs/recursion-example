@@ -1,5 +1,5 @@
 use methods::{RECURSION_EXAMPLE_ELF, RECURSION_EXAMPLE_ID};
-use recursive_lib::ProverInput;
+use recursive_lib::{JournalState, ProverInput};
 use risc0_zkvm::{default_prover, ExecutorEnv};
 
 fn main() {
@@ -42,7 +42,7 @@ fn main() {
         // Verify the proof
         last_receipt.verify(RECURSION_EXAMPLE_ID).unwrap();
 
-        let value: u32 = last_receipt.journal.decode().unwrap();
-        println!("Step {} Journal: {}", i, value);
+        let state: JournalState = last_receipt.journal.decode().unwrap();
+        println!("Step {} Journal: {}", i, state.value);
     }
 }

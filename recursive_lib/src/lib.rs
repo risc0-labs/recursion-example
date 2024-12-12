@@ -7,7 +7,14 @@ pub struct ProverInput {
     pub prev_journal: Option<Vec<u8>>,
 }
 
-pub fn verify_proof(journal: &[u8], image_id: &[u32; 8]) -> u32 {
-    env::verify(*image_id, journal).unwrap();
-    bincode::deserialize(journal).unwrap()
+#[derive(Debug, Serialize, Deserialize)]
+pub struct JournalState {
+    pub value: u32,
+    pub image_id: [u32; 8],
+}
+
+pub fn verify_proof(journal: &[u8]) -> JournalState {
+    let state: JournalState = bincode::deserialize(journal).unwrap();
+    env::verify(state.image_id, journal).unwrap();
+    state
 }

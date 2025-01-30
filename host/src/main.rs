@@ -48,9 +48,7 @@ fn main() {
         let state: JournalState = last_receipt.journal.decode().unwrap();
         println!(
             "Step {} Journal - Accumulated Value: {}, Hash: {:?}",
-            i,
-            state.private_value,
-            state.public_input_hash
+            i, state.private_value, state.public_input_hash
         );
     }
 }

@@ -3,7 +3,6 @@ use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
 #[derive(Debug, Serialize, Deserialize)]
-#[repr(C)]
 pub struct ProverInput {
     pub expected_image_id: [u32; 8],
     pub prev_journal: Option<Vec<u8>>,
@@ -11,7 +10,6 @@ pub struct ProverInput {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-#[repr(C)]
 pub struct JournalState {
     pub private_value: u32,
     pub image_id: [u32; 8],
